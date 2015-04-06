@@ -12,7 +12,7 @@ Source0:	https://github.com/facebook/mcrouter/archive/%{gitrev}/%{name}-%{gitrev
 # Source0-md5:	f99eb19ccd41169e9570ca2b1d152b8a
 Patch0:		boost-context.patch
 URL:		https://github.com/facebook/mcrouter
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.51.0
 BuildRequires:	double-conversion-devel
