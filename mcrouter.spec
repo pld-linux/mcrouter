@@ -15,6 +15,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.51.0
 BuildRequires:	double-conversion-devel
+BuildRequires:	folly-devel >= 0.31
 BuildRequires:	gflags-devel
 BuildRequires:	glog-devel
 BuildRequires:	libstdc++-devel
