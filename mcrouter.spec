@@ -19,10 +19,12 @@ BuildRequires:	double-conversion-devel
 BuildRequires:	folly-devel >= 0.31
 BuildRequires:	gflags-devel
 BuildRequires:	glog-devel
+BuildRequires:	libcap-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
 BuildRequires:	ragel
+BuildRequires:	zlib-devel
 # needs folly, which builds on x86-64 only
 ExclusiveArch:	%{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
