@@ -1,5 +1,5 @@
 # TODO:
-# - compile fails: undefined reference to `jump_fcontext'
+# - compile fails: undefined reference to `jump_fcontext', check boost-context.patch for proper fix
 %define	gitrev	39a7572
 Summary:	Memcached protocol router for scaling memcached deployments
 Name:		mcrouter
@@ -10,6 +10,7 @@ License:	BSD
 Group:		Daemons
 Source0:	https://github.com/facebook/mcrouter/archive/%{gitrev}/%{name}-%{gitrev}.tar.gz
 # Source0-md5:	f99eb19ccd41169e9570ca2b1d152b8a
+Patch0:		boost-context.patch
 URL:		https://github.com/facebook/mcrouter
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -35,6 +36,7 @@ infrastructure at Facebook and Instagram where mcrouter handles almost
 %prep
 %setup -qc
 mv mcrouter-*/* .
+%patch0 -p1
 
 %build
 cd mcrouter
