@@ -1,22 +1,17 @@
-# TODO:
-# - compile fails: undefined reference to `jump_fcontext', check boost-context.patch for proper fix
-%define	gitrev	39a7572
 Summary:	Memcached protocol router for scaling memcached deployments
 Name:		mcrouter
-# version from configure.ac
-Version:	1.0
-Release:	0.1
+Version:	0.1.0
+Release:	1
 License:	BSD
 Group:		Daemons
-Source0:	https://github.com/facebook/mcrouter/archive/%{gitrev}/%{name}-%{gitrev}.tar.gz
-# Source0-md5:	f99eb19ccd41169e9570ca2b1d152b8a
-Patch0:		boost-context.patch
+Source0:	https://github.com/facebook/mcrouter/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	5cc3e44ee2ff027e8b4077494222610c
 URL:		https://github.com/facebook/mcrouter
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.51.0
 BuildRequires:	double-conversion-devel
-BuildRequires:	folly-devel >= 0.31
+BuildRequires:	folly-devel >= 0.41.0
 BuildRequires:	gflags-devel
 BuildRequires:	glog-devel
 BuildRequires:	libcap-devel
@@ -36,9 +31,7 @@ infrastructure at Facebook and Instagram where mcrouter handles almost
 5 billion requests per second at peak.
 
 %prep
-%setup -qc
-mv mcrouter-*/* .
-%patch0 -p1
+%setup -q
 
 %build
 cd mcrouter
@@ -60,4 +53,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README.md LICENSE PATENTS
 %attr(755,root,root) %{_bindir}/mcrouter
