@@ -1,0 +1,81 @@
+--- b/mcrouter/Makefile.am
++++ mcrouter-0.1.0/mcrouter/Makefile.am	2015-07-30 15:32:15.698144074 +0300
+@@ -2,7 +2,7 @@
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-noinst_LIBRARIES = libmcroutercore.a
++lib_LTLIBRARIES = libmcroutercore.la
+ bin_PROGRAMS = mcrouter
+ 
+ BUILT_SOURCES = \
+@@ -19,7 +19,7 @@
+   lib/mc/ascii_client.c \
+   lib/network/McAsciiParser-gen.cpp
+ 
+-libmcroutercore_a_SOURCES = \
++libmcroutercore_la_SOURCES = \
+   async.cpp \
+   async.h \
+   awriter.h \
+@@ -187,5 +187,6 @@
+ 
+-libmcroutercore_a_CPPFLAGS = -Ioss_include
++libmcroutercore_la_CPPFLAGS = -Ioss_include
++libmcroutercore_la_LIBADD = -lfolly
+ 
+-mcrouter_LDADD = libmcroutercore.a lib/libmcrouter.a
++mcrouter_LDADD = $(top_builddir)/libmcroutercore.la $(top_builddir)/lib/libmcrouter.la
+ mcrouter_CPPFLAGS = -Ioss_include
+--- b/mcrouter/lib/Makefile.am
++++ mcrouter-0.1.0/mcrouter/lib/Makefile.am	2015-07-30 15:05:52.049330939 +0300
+@@ -1,8 +1,8 @@
+ SUBDIRS = . config cycles fbi network test
+ 
+-noinst_LIBRARIES = libmcrouter.a
++lib_LTLIBRARIES = libmcrouter.la
+ 
+-libmcrouter_a_SOURCES = \
++libmcrouter_la_SOURCES = \
+   CacheClientStats.h \
+   Ch3HashFunc.h \
+   Crc32HashFunc.h \
+@@ -179,2 +179,3 @@
+-libmcrouter_a_CPPFLAGS = -I$(top_srcdir)/oss_include
+-libmcrouter_a_CFLAGS = -I$(top_srcdir)/oss_include
++libmcrouter_la_CPPFLAGS = -I$(top_srcdir)/oss_include
++libmcrouter_la_CFLAGS = -I$(top_srcdir)/oss_include
++libmcrouter_la_LIBADD = -lfolly
+--- a/mcrouter/routes/test/Makefile.am
++++ b/mcrouter/routes/test/Makefile.am
+@@ -11,4 +11,4 @@ mcrouter_routes_test_SOURCES = \
+   WarmUpRouteTest.cpp
+ 
+ mcrouter_routes_test_CPPFLAGS = -I$(top_srcdir)/oss_include
+-mcrouter_routes_test_LDADD = $(top_builddir)/libmcroutercore.a $(top_builddir)/lib/libmcrouter.a -lgtest -lfollybenchmark
++mcrouter_routes_test_LDADD = $(top_builddir)/libmcroutercore.la $(top_builddir)/lib/libmcrouter.la -lgtest -lfollybenchmark
+--- a/mcrouter/test/cpp_unit_tests/Makefile.am
++++ b/mcrouter/test/cpp_unit_tests/Makefile.am
+@@ -16,7 +16,7 @@ mcrouter_test_SOURCES = \
+   TokenBucketTest.cpp
+ 
+ mcrouter_test_CPPFLAGS = -I$(top_srcdir)/oss_include
+-mcrouter_test_LDADD = $(top_builddir)/libmcroutercore.a $(top_builddir)/lib/libmcrouter.a -lgtest -lgtestmain
++mcrouter_test_LDADD = $(top_builddir)/libmcroutercore.la $(top_builddir)/lib/libmcrouter.la -lgtest -lgtestmain
+ 
+ mcrouter_libmc_test_SOURCES = \
+   libmcrouter_test.cpp \
+@@ -26,4 +26,4 @@ mcrouter_libmc_test_SOURCES = \
+   MemcacheLocal.h
+ 
+ mcrouter_libmc_test_CPPFLAGS = -I$(top_srcdir)/oss_include
+-mcrouter_libmc_test_LDADD = $(top_builddir)/libmcroutercore.a $(top_builddir)/lib/libmcrouter.a -lgtest
++mcrouter_libmc_test_LDADD = $(top_builddir)/libmcroutercore.la $(top_builddir)/lib/libmcrouter.la -lgtest
+--- mcrouter-0.1.0/mcrouter/lib/network/Makefile.am~	2015-06-23 05:21:52.000000000 +0300
++++ mcrouter-0.1.0/mcrouter/lib/network/Makefile.am	2015-07-30 14:30:38.322797598 +0300
+@@ -8,4 +8,4 @@
+   test/MockMcServer.cpp
+ 
+ mock_mc_server_CPPFLAGS = -I$(top_srcdir)/oss_include
+-mock_mc_server_LDADD = $(top_builddir)/lib/libmcrouter.a
++mock_mc_server_LDADD = $(top_builddir)/lib/libmcrouter.la
