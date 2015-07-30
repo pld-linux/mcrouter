@@ -6,6 +6,7 @@ License:	BSD
 Group:		Daemons
 Source0:	https://github.com/facebook/mcrouter/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	5cc3e44ee2ff027e8b4077494222610c
+Patch0:		am-subdir-objects.patch
 URL:		https://github.com/facebook/mcrouter
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -15,6 +16,7 @@ BuildRequires:	folly-devel >= 0.41.0
 BuildRequires:	gflags-devel
 BuildRequires:	glog-devel
 BuildRequires:	libcap-devel
+BuildRequires:	libevent-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
@@ -32,6 +34,7 @@ infrastructure at Facebook and Instagram where mcrouter handles almost
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 cd mcrouter

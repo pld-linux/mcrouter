@@ -1,0 +1,27 @@
+
+mute automake 1.14 warning
+
+Makefile.am:22: warning: source file 'routes/AllAsyncRoute.cpp' is in a subdirectory,
+Makefile.am:22: but option 'subdir-objects' is disabled
+automake: warning: possible forward-incompatibility.
+automake: At least a source file is in a subdirectory, but the 'subdir-objects'
+automake: automake option hasn't been enabled.  For now, the corresponding output
+automake: object file(s) will be placed in the top-level directory.  However,
+automake: this behaviour will change in future Automake versions: they will
+automake: unconditionally cause object files to be placed in the same subdirectory
+automake: of the corresponding sources.
+automake: You are advised to start using 'subdir-objects' option throughout your
+automake: project, to avoid future incompatibilities.
+
+
+--- mcrouter-0.1.0/mcrouter/configure.ac~	2015-06-23 05:21:52.000000000 +0300
++++ mcrouter-0.1.0/mcrouter/configure.ac	2015-07-30 15:08:45.851681042 +0300
+@@ -8,7 +8,7 @@
+ AC_CONFIG_LINKS([test/config.py:test/mcrouter_config.py])
+ AC_CONFIG_AUX_DIR([build-aux])
+ 
+-AM_INIT_AUTOMAKE([foreign dist-bzip2 nostdinc])
++AM_INIT_AUTOMAKE([foreign dist-bzip2 nostdinc subdir-objects])
+ 
+ AC_CONFIG_MACRO_DIR([m4])
+ 
